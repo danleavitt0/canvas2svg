@@ -218,7 +218,7 @@
      * enableMirroring - enables canvas mirroring (get image data) (defaults to false)
      * document - the document object (defaults to the current document)
      */
-    ctx = function (o) {
+    ctx = function (h, w, args) {
         var defaultOptions = { width:500, height:500, enableMirroring : false}, options;
 
         //keep support for this way of calling C2S: new C2S(width,height)
@@ -231,7 +231,6 @@
         } else {
             options = o;
         }
-
         if (!(this instanceof ctx)) {
             //did someone call this without new?
             return new ctx(options);
@@ -265,6 +264,9 @@
         this.__root.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:xlink", "http://www.w3.org/1999/xlink");
         this.__root.setAttribute("width", this.width);
         this.__root.setAttribute("height", this.height);
+        for (var key in args) {
+          this.__root.setAttribute(key, args[key])
+        }
 
         //make sure we don't generate the same ids in defs
         this.__ids = {};
@@ -551,7 +553,7 @@
     /**
      * Create a new Path Element
      */
-    ctx.prototype.beginPath = function () {
+    ctx.prototype.beginPath = function (args) {
         var path, parent;
 
         // Note that there is only one current default path, it is not part of the drawing state.
@@ -559,7 +561,7 @@
         this.__currentDefaultPath = "";
         this.__currentPosition = {};
 
-        path = this.__createElement("path", {}, true);
+        path = this.__createElement("path", args, true);
         parent = this.__closestGroupOrSvg();
         parent.appendChild(path);
         this.__currentElement = path;

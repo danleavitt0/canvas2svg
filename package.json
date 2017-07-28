@@ -1,9 +1,9 @@
 {
-  "name": "canvas2svg",
-  "version": "1.0.19",
-  "description": "canvas2svg",
+  "name": "pb-canvas2svg",
+  "version": "1.0.0",
+  "description": "canvas2svg edited for pixelbots",
   "main": "canvas2svg.js",
-  "homepage": "http://gliffy.github.io/canvas2svg/",
+  "homepage": "http://danleavitt0/canvas2svg/",
   "directories": {
     "test": "test"
   },
@@ -15,7 +15,7 @@
     "svg",
     "canvas2svg"
   ],
-  "author": "Kerry Liu",
+  "author": "Daniel Leavitt",
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {

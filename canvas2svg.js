@@ -265,14 +265,20 @@
         this.__root.setAttribute("width", this.width);
         this.__root.setAttribute("height", this.height);
         for (var key in args) {
-          this.__root.setAttribute(key, args[key])
+          if (key !== 'defs') {
+            this.__root.setAttribute(key, args[key])
+          }
         }
 
         //make sure we don't generate the same ids in defs
         this.__ids = {};
 
         //defs tag
-        this.__defs = this.__document.createElementNS("http://www.w3.org/2000/svg", "defs");
+        if (args.defs) {
+          this.__defs = args.defs
+        } else {
+          this.__defs = this.__document.createElementNS("http://www.w3.org/2000/svg", "defs");
+        }
         this.__root.appendChild(this.__defs);
 
         //also add a group child. the svg element can't use the transform attribute
